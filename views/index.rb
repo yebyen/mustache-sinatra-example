@@ -2,7 +2,7 @@ class App
   module Views
     class Index < Layout
       def content
-        "Welcome! Mustache lives."
+        "Main page content, Index < Layout"
       end
     end
   end
