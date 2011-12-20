@@ -1,0 +1,12 @@
+
+<form method="POST">
+{{#rows}}
+<input type="text" name="{{key}}" value="{{value}}"/><br/>
+{{/rows}}
+<input type="submit" name="submit" value="Update"/>
+</form>
+{{#have}}
+<pre>
+got: {{got}}
+</pre>
+{{/have}}

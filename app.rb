@@ -1,9 +1,17 @@
 require 'sinatra/base'
 require 'mustache/sinatra'
 
+$: << "./"
 class App < Sinatra::Base
   register Mustache::Sinatra
   require 'views/layout'
+  require 'views/hello'
+  require 'sqlite3'
+
+  def initialize
+    super
+    @db=SQLite3::Database.new( "test.db" )
+  end
 
   set :mustache, {
     :views     => 'views/',
@@ -17,6 +25,14 @@ class App < Sinatra::Base
 
   get '/other' do
     mustache :other
+  end
+
+  get '/hello' do
+    mustache :hello
+	end
+  post '/hello' do
+    Views::Hello::have ([params[:foo], params[:bar], params[:baz]])
+    mustache :hello
   end
 
   get '/nolayout' do
