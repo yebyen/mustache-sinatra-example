@@ -29,7 +29,7 @@ class App < Sinatra::Base
 
   get '/hello' do
     mustache :hello
-	end
+  end
   post '/hello' do
     Views::Hello::have ([params[:foo], params[:bar], params[:baz]])
     mustache :hello
