@@ -34,6 +34,12 @@ class App < Sinatra::Base
     Views::Hello::have ([params[:foo], params[:bar], params[:baz]])
     mustache :hello
   end
+  get '/document*' do
+    row = @db.get_first_row(
+      "select * from schema_documentation.field_definitions" )
+    Views::Document::have ( row )
+    mustache :document
+  end
 
   get '/nolayout' do
     content_type 'text/plain'
