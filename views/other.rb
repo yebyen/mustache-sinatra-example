@@ -1,3 +1,4 @@
+require 'awesome_print'
 #require 'pp'
 #require 'stringio'
 
@@ -20,6 +21,9 @@ class App
     class Other < Mustache
       def rows
         @db.execute("select * from to_document limit 7")
+      end
+      def row_ai
+        @db.execute("select * from to_document limit 7").ai(:html=>true)
       end
       def ascii_art
         <<-end_art
