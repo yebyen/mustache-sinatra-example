@@ -6,6 +6,7 @@ class App < Sinatra::Base
   register Mustache::Sinatra
   require 'views/layout'
   require 'views/hello'
+  require 'views/document'
   require 'sqlite3'
 
   def initialize
@@ -36,8 +37,8 @@ class App < Sinatra::Base
     mustache :hello
   end
   get '/document*' do
-    row = @db.get_first_row(
-      "select * from schema_documentation.field_definitions" )
+    row = @db.execute(
+      "select * from to_document" )
     Views::Document::have ( row )
     mustache :document
   end
