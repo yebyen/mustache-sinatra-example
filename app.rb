@@ -11,6 +11,7 @@ class App < Sinatra::Base
   def initialize
     super
     @db=SQLite3::Database.new( "test.db" )
+    @db.results_as_hash=true
   end
 
   set :mustache, {
