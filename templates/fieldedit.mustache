@@ -1,21 +1,32 @@
 {{#have}}
-<h4>Edit Field Documentation</h4>
+
+  <div style="float: left">
+  <h4>Edit Field Documentation</h4>
+
 {{#got}}
-<pre>
-{{schema}}.{{table}}.{{column}}
-</pre>
+  Record: <code>{{schema}}.{{table}}.{{column}}</code>
 {{#row}}
-<form method="post">
-<input type=hidden value="{{schema}}" name="schema"/>
-<input type=hidden value="{{table}}" name="table"/>
-<input type=hidden value="{{column}}" name="column"/>
-<textarea cols="40" rows="4" name="notes">{{notes}}</textarea>
-<br/><input type="text" name="status" value="{{status}}"/>
-<button type="submit">Save</button>
-</form>
+  <form method="post">
+    <input type=hidden value="{{schema}}" name="schema"/>
+    <input type=hidden value="{{table}}" name="table"/>
+    <input type=hidden value="{{column}}" name="column"/>
+    <textarea cols="40" rows="4" name="notes">{{notes}}</textarea>
+    <br/><input type="text" name="status" value="{{status}}"/>
+    <button type="submit">Save</button>
+  </form>
 {{/row}}
+  </div>
+  <div style="float: left; margin-left: 20px">
+    <table><tr><th>value</th></tr>
+{{#data}}  <tr><td style="margin: 0px; padding: 0px;">{{{value}}}</td></tr>
+{{/data}}
+    </table>
+  </div>
 {{/got}}
+
 {{/have}}
 {{^have}}
-No params :(
+
+  No params :(
+
 {{/have}}
