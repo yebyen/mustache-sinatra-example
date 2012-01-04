@@ -12,11 +12,11 @@ class App
         @@have
       end
       def self.update(db, record)
-	schema=db.escape(record["schema"])
-	table=db.escape(record["table"])
-	column=db.escape(record["column"])
-	notes=db.escape(record["notes"])
-	status=db.escape(record["status"])
+	schema=record["schema"]
+	table=record["table"]
+	column=record["column"]
+	notes=record["notes"]
+	status=record["status"]
 
 	results=db.query("UPDATE field_definitions SET notes='#{notes}', status='#{status}' WHERE table_schema='#{schema}' AND table_name='#{table}' AND column_name='#{column}'")
 	# Check for error status maybe?

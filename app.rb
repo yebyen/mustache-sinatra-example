@@ -50,6 +50,7 @@ class App < Sinatra::Base
     column=params[:splat][2]
 
     key=URI.escape("#{schema}.#{table}.#{column}")
+    backlink=URI.escape("#{schema}.#{table}")
 
     schema=@db.escape(schema)
     table=@db.escape(table)
@@ -59,15 +60,23 @@ class App < Sinatra::Base
     status=@db.escape(params[:status])
 
     record = { "schema" => schema, "table" => table, "column" =>
-      column, "notes" => notes, "status" => status }
+      column, "notes" => notes, "status" => status, "backlink" =>
+      backlink }
 
-    Views::Fieldedit::update(db, record)
+    Views::Fieldedit::update(@db, record)
 
     redirect "/reports/undocumented/fields/#{key}"
   end
 
   get '/reports/undocumented/fields/*.*.*' do
-    Views::Fieldedit::have ( Views::Fieldedit::row(@db, params) ) 
+    schema=params[:splat][0]
+    table=params[:splat][1]
+    backlink=URI.escape("#{schema}.#{table}")
+
+    data=Views::Fieldedit::row(@db, params)
+    data["backlink"]=backlink
+
+    Views::Fieldedit::have ( data ) 
     mustache :fieldedit
   end
 

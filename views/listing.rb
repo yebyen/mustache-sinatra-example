@@ -48,6 +48,7 @@ class App
 	  result["total"] = result["doc"] + result["undoc"]
 	  @@data["rows"] << result
 	end
+	@@data["rows"].sort_by! {|hsh| hsh["undoc"]}
 	@@data
       end
       def self.have(got)
