@@ -49,7 +49,13 @@ class App
 	  @@data["rows"] << result
 	end
 	@@data["rows"].sort_by! {|hsh| hsh["undoc"]}
-	@@data
+	h=Hash.new(0)
+	@@data["rows"].each do |hash|
+	  h["count_doc"] += hash["doc"]
+	  h["count_undoc"] += hash["undoc"]
+	  h["total_shown"] += hash["doc"]+hash["undoc"]
+	end
+	@@data.merge(h)
       end
       def self.have(got)
         @@have=got
