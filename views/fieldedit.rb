@@ -17,8 +17,9 @@ class App
 	column=record["column"]
 	notes=record["notes"]
 	status=record["status"]
+	editable=(record["editable"]=="true" ? 1 : 0)
 
-	results=db.query("UPDATE field_definitions SET notes='#{notes}', status='#{status}' WHERE table_schema='#{schema}' AND table_name='#{table}' AND column_name='#{column}'")
+	results=db.query("UPDATE field_definitions SET notes='#{notes}', status='#{status}', editable='#{editable}' WHERE table_schema='#{schema}' AND table_name='#{table}' AND column_name='#{column}'")
 	# Check for error status maybe?
       end
       def self.row(db, params)
@@ -32,7 +33,7 @@ class App
 	  table=db.escape(params[:splat][1])
 	  column=db.escape(params[:splat][2])
 
-	  results=db.query("SELECT notes, status FROM field_definitions WHERE table_schema='#{schema}' AND table_name='#{table}' AND column_name='#{column}'")
+	  results=db.query("SELECT notes, status, editable FROM field_definitions WHERE table_schema='#{schema}' AND table_name='#{table}' AND column_name='#{column}'")
 	  data={
 	    "schema" => schema,
 	    "table" => table,
@@ -41,6 +42,12 @@ class App
 	    "data"=>[] }
 	  results.each do |row|
 	    data["row"]=row
+	    if row["editable"]==0
+	      data["row"]["editable"]=nil
+	    else
+	      data["row"]["editable"]=true
+	    end
+	    
 	  end
 	  result=db1.query("SELECT DISTINCT `#{column}` FROM `#{table}` LIMIT 20")
 	  result.each do |row|

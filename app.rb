@@ -58,10 +58,11 @@ class App < Sinatra::Base
 
     notes=@db.escape(params[:notes])
     status=@db.escape(params[:status])
+    editable=@db.escape(params[:editable].to_s)
 
     record = { "schema" => schema, "table" => table, "column" =>
       column, "notes" => notes, "status" => status, "backlink" =>
-      backlink }
+      backlink, "editable" => editable }
 
     Views::Fieldedit::update(@db, record)
 

@@ -11,7 +11,8 @@
     <input type=hidden value="{{table}}" name="table"/>
     <input type=hidden value="{{column}}" name="column"/>
     <textarea cols="40" rows="4" name="notes">{{notes}}</textarea>
-    <br/><input type="text" name="status" value="{{status}}"/>
+    <br/>Status: <input type="text" name="status" value="{{status}}"/>
+    Editable? <input type="checkbox" name="editable" value="true" {{#editable}}checked="yes"{{/editable}}/>
     <button type="submit">Save</button>
   </form>
 {{/row}}
