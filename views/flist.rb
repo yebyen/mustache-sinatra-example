@@ -1,3 +1,5 @@
+require 'cgi'
+
 class App
   module Views
     class Flist < Mustache
@@ -28,7 +30,7 @@ class App
 	    'table_name'=>row["table_name"], 'field_name'=>
 	      row["column_name"],
 	    'notes'=>row["notes"], 'link'=>
-	      "<a href='#{row["tkey"]}'>Edit</a>",
+	      "<a href='#{CGI.escape(row["tkey"])}'>Edit</a>",
 	    'key'=>row["tkey"] }
 	end
 	data

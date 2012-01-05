@@ -1,6 +1,6 @@
 require 'sinatra/base'
 require 'mustache/sinatra'
-require 'uri'
+require 'cgi'
 
 $: << "./"
 class App < Sinatra::Base
@@ -49,8 +49,8 @@ class App < Sinatra::Base
     table=params[:splat][1]
     column=params[:splat][2]
 
-    key=URI.escape("#{schema}.#{table}.#{column}")
-    backlink=URI.escape("#{schema}.#{table}")
+    key=CGI.escape("#{schema}.#{table}.#{column}")
+    backlink=CGI.escape("#{schema}.#{table}")
 
     schema=@db.escape(schema)
     table=@db.escape(table)
@@ -62,7 +62,7 @@ class App < Sinatra::Base
 
     record = { "schema" => schema, "table" => table, "column" =>
       column, "notes" => notes, "status" => status, "backlink" =>
-      backlink, "editable" => editable }
+      backlink, "editable" => editable, "key" => key }
 
     Views::Fieldedit::update(@db, record)
 
@@ -72,7 +72,9 @@ class App < Sinatra::Base
   get '/reports/undocumented/fields/*.*.*' do
     schema=params[:splat][0]
     table=params[:splat][1]
-    backlink=URI.escape("#{schema}.#{table}")
+    column=params[:splat][2]
+    key=CGI.escape("#{schema}.#{table}.#{column}")
+    backlink=CGI.escape("#{schema}.#{table}")
 
     data=Views::Fieldedit::row(@db, params)
     data["backlink"]=backlink

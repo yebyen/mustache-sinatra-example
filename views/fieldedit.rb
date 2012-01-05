@@ -1,3 +1,5 @@
+require 'cgi'
+
 class App
   module Views
     class Fieldedit < Mustache
@@ -18,6 +20,7 @@ class App
 	notes=record["notes"]
 	status=record["status"]
 	editable=(record["editable"]=="true" ? 1 : 0)
+	key=record["key"]
 
 	results=db.query("UPDATE field_definitions SET notes='#{notes}', status='#{status}', editable='#{editable}' WHERE table_schema='#{schema}' AND table_name='#{table}' AND column_name='#{column}'")
 	# Check for error status maybe?
@@ -49,6 +52,7 @@ class App
 	    end
 	    
 	  end
+	  p column
 	  result=db1.query("SELECT DISTINCT `#{column}` FROM `#{table}` LIMIT 20")
 	  result.each do |row|
 	    data["data"]<<{"value"=> "<pre style='margin: 0px;'>" << row[column].to_s << "</pre>"}

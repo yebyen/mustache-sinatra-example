@@ -6,7 +6,7 @@
 {{#got}}
   Record: <code>{{schema}}.{{table}}.{{column}}</code>
 {{#row}}
-  <form method="post">
+  <form method="post" action="{{key}}">
     <input type=hidden value="{{schema}}" name="schema"/>
     <input type=hidden value="{{table}}" name="table"/>
     <input type=hidden value="{{column}}" name="column"/>
