@@ -15,7 +15,7 @@ Note that we use a `templates` and a `views` directory. *You don't
 have to.* By default the views and templates will live in the `views`
 directory together.
 
-### TODO
+### Suggested TODOs
 
 1.  add a next button, spanning columns, tables, and eventually DBs
 2.  add a "fields with same name" view and "same disposition" action
