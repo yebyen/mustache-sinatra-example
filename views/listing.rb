@@ -37,7 +37,6 @@ class App
 	  results_sub = db.query("SELECT CONCAT(table_schema, '.', table_name) AS tkey FROM field_definitions WHERE (status IS NULL or status NOT LIKE '%#2') AND table_schema='mmi1' AND table_name='#{table_name}'")
 	  results_sub.each do |sub|
 	    result["key"] = sub['tkey']
-	    p result["key"]
 	  end
 	  result["total"] = result["doc"] + result["undoc"]
 	  @@data["rows"] << result
