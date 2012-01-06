@@ -18,7 +18,7 @@ class App
 	table=record["table"]
 	column=record["column"]
 	notes=record["notes"]
-	status=record["status"]
+	status=(record["status"].match(/(.*)#2/) ? record["status"] : record["status"] + "#2")
 	editable=(record["editable"]=="true" ? 1 : 0)
 	key=record["key"]
 
@@ -44,15 +44,16 @@ class App
 	    "row"=>{},
 	    "data"=>[] }
 	  results.each do |row|
+	    row["status"].chomp!("#2") if !row["status"].nil?
 	    data["row"]=row
 	    if row["editable"]==0
 	      data["row"]["editable"]=nil
 	    else
 	      data["row"]["editable"]=true
 	    end
+
 	    
 	  end
-	  p column
 	  result=db1.query("SELECT DISTINCT `#{column}` FROM `#{table}` LIMIT 20")
 	  result.each do |row|
 	    data["data"]<<{"value"=> "<pre style='margin: 0px;'>" << row[column].to_s << "</pre>"}
