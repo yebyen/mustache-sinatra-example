@@ -10,13 +10,10 @@ class App < Sinatra::Base
   require 'views/listing'
   require 'views/flist'
   require 'views/fieldedit'
-  require 'sqlite3'
   require 'mysql2'
 
   def initialize
     super
-    @file=SQLite3::Database.new( "test.db" )
-    @file.results_as_hash=true
     @db=Mysql2::Client.new(:host => 'db0', :username => 'kbarrett',
       :password => File.new("pass","r").gets, :database => 'schema_documentation')
   end
