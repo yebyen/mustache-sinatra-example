@@ -18,7 +18,7 @@ class App
 	table=record["table"]
 	column=record["column"]
 	notes=record["notes"]
-	status=(record["status"].match(/(.*)#2/) ? record["status"] : record["status"] + "#2")
+	status=(record["status"].match(/(.*)#2$/) ? record["status"] : record["status"] + "#2")
 	editable=(record["editable"]=="true" ? 1 : 0)
 	key=record["key"]
 
