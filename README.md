@@ -16,6 +16,7 @@ have to.* By default the views and templates will live in the `views`
 directory together.
 
 We should:
+
 1.  add a next button, spanning columns, tables, and eventually DBs
 2.  add a "fields with same name" view and "same disposition" action
 3.  consolidate filter logic across views into a single incantation
