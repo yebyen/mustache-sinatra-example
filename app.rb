@@ -80,7 +80,7 @@ class App < Sinatra::Base
     mustache :fieldedit
   end
 
-  get '/reports/undocumented/fields/*.*' do
+  get %r{/reports/undocumented/fields/([\w\s]+)\.([\w\s]+)} do
     data=Views::Flist::rows(@db, params)
 
     Views::Flist::have ( data )

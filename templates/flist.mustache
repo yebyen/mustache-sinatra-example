@@ -13,5 +13,7 @@
 {{/rows}}
 </table>
 <a href="../tables/mmi">back to MMI1</a>
+{{^filt}}| <a href="{{key}}?filter=n">filter</a>{{/filt}}
+{{#filt}}| <a href="{{key}}?filter=true">unfilter</a>{{/filt}}
 {{/got}}
 {{/have}}
