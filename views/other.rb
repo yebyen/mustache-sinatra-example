@@ -20,10 +20,10 @@ class App
   module Views
     class Other < Mustache
       def rows
-        @db.execute("select * from to_document limit 7")
+        @db.query("select * from to_document limit 7")
       end
       def row_ai
-        @db.execute("select * from to_document limit 7").ai(:html=>true)
+        @db.query("select * from to_document limit 7").ai(:html=>true)
       end
       def ascii_art
         <<-end_art

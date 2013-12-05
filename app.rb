@@ -88,7 +88,7 @@ class App < Sinatra::Base
   end
 
   get '/document*' do
-    row = @db.execute(
+    row = @db.query(
       "select * from to_document" )
     Views::Document::have ( row )
     mustache :document
